@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
+  $.get('http://0.0.0.0:5001/api/v1/status', function (data, status) {
+        if (status === 'success') {
+            $('DIV#api_status').addClass('available');
+        } else {
+            $('DIV#api_status').removeClass('available');
+        }
+    });
+
   let result = {};
   $('input[type=checkbox]').click(function () {
     if (this.checked) {
@@ -16,12 +24,4 @@ document.addEventListener('DOMContentLoaded', function () {
       $('.amenities h4').text(amens_list.join(', '));
     }
   });
-
-    $.get('http://0.0.0.0:5001/api/v1/status', function (data, status) {
-	if (status === 'OK') {
-	    $('DIV#api_status').addClass('available');
-	} else {
-	    $('DIV#api_status').removeClass('available');
-	}
-    });
 });
